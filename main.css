@@ -269,3 +269,52 @@ img {
   background-color: wheat;
   border-radius: 6px;
 }
+@media (max-width: 768px) {
+  .main-wrapper {
+    flex-direction: column;
+  }
+
+  .home {
+    display: none;
+  }
+  .order-panel {
+    width: 100%;
+    order: 2; 
+    padding: 16px;
+  }
+
+  .order-panel ul {
+    flex-direction: column;
+  }
+
+  .order-panel li {
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .hero__list {
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 16px;
+  }
+
+  .hero__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header__item {
+    display: inline-block;
+  }
+  .tab_content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+   .header__container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .input {
+    width: 100%;
+  }
+}
