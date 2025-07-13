@@ -10,7 +10,25 @@ let orders = JSON.parse(localStorage.getItem("orders")) || [];
 renderOrders();
 
 fetchProducts(currentCategory);
-
+setTimeout(() => {
+  tabs.forEach((t) => {
+    const tabText = t.textContent.toLowerCase().split(" ")[0];
+    const categoryMap = {
+      hot: "hot",
+      cold: "cool",
+      soup: "sushi",
+      grill: "lunch",
+      appetizer: "salats",
+      dessert: "salats",
+    };
+    const mapped = categoryMap[tabText];
+    if (mapped === currentCategory) {
+      t.classList.add("active-tab");
+    } else {
+      t.classList.remove("active-tab");
+    }
+  });
+}, 0);
 const tabs = document.querySelectorAll(".hero__list a");
 tabs.forEach((tab) => {
   tab.addEventListener("click", (e) => {
