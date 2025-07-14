@@ -53,7 +53,7 @@ tabs.forEach((tab) => {
 
 function fetchProducts(category) {
   fetch(
-    `https://admin-json-server.vercel.app/${category}?_page=${page}&_limit=3`
+    `https://admin-json-server.vercel.app/${category}?_page=${page}&_limit=8`
   )
     .then((res) => res.json())
     .then((data) => {
