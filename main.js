@@ -2,7 +2,8 @@ const tabContent = document.querySelector(".tab_content");
 const orderList = document.getElementById("orderList");
 const subtotalEl = document.getElementById("subtotal");
 const tabBtn = document.querySelector(".tab_btn");
-
+const input = document.querySelector(".input")
+const products = document.querySelector(".products");
 let currentCategory = "hot";
 let page = 1;
 
@@ -10,6 +11,43 @@ let orders = JSON.parse(localStorage.getItem("orders")) || [];
 renderOrders();
 
 fetchProducts(currentCategory);
+const renderData = (data) => {
+  if (!input.value) {
+    products.innerHTML = "";
+    return;
+  }
+  products.innerHTML = data
+    .map((item) => {
+      return `
+      <div class="productss">
+        <img src="${item.img}" alt="img" />
+        <h2 class="productss__title">${item.title}</h2>
+      </div>
+    `;
+    })
+    .join("");
+};
+
+function debounce(func, delay) {
+  let timeoutId;
+  return function (e) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(e.target.value);
+    }, delay);
+  };
+}
+
+async function handleInput(value) {
+  const res = await fetch(`https://admin-json-server.vercel.app/all?title_like=${value}`);
+  const data = await res.json();
+  renderData(data);
+}
+
+const debouncedInput = debounce(handleInput, 500);
+
+input.addEventListener("keyup", debouncedInput);
+
 setTimeout(() => {
   tabs.forEach((t) => {
     const tabText = t.textContent.toLowerCase().split(" ")[0];
